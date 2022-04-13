@@ -23,5 +23,7 @@ public interface WebLocators {
     String NOTES = "//span[@class='position-relative']//*[name()='svg']";
     String DRIVER_NOTES = "//textarea[@placeholder='Notes for driver']";
     String ADD_NOTE_BTN = "//button[@class='btn btn-primary']";
-    String BILLING = "//a[@class='nav-link active' and @href='#billing']";
+    String BILLING = "//a[@class='nav-link active']//*[name()='svg']";
+    String PRICE = "//input[@name='finalAmount']";
+    String SUMMARY_TOTAL = "//div[@class='summary']//div[@class='col-6 font-size-medium font-weight-500 text-primary text-right']/span";
 }

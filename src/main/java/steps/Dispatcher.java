@@ -71,13 +71,15 @@ public class Dispatcher {
         dispatcher.addNewNotes(arg0);
     }
 
-    @And("User navigates to Billing")
-    public void redirectToBilling() {
+    @Then("User should be able to view correct Summary")
+    public void validateBillingSummary() {
         dispatcher = new forms.Dispatcher(base.getdriver());
-        dispatcher.redirectToBilling();
+        dispatcher.validateBillingSummary();
     }
 
-    @Then("User should be able to view correct Summary")
-    public void userShouldBeAbleToViewCorrectSummary() {
+    @And("User selects load option {string}")
+    public void selectLoadOptions(String arg0) {
+        dispatcher = new forms.Dispatcher(base.getdriver());
+        dispatcher.selectLoadOptions(arg0);
     }
 }

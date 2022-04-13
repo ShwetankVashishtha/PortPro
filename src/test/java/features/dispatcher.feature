@@ -1,4 +1,4 @@
-Feature: Verify login and dashboard scenarios
+Feature: Verify dispatcher scenarios
 
   Background: PortPro Login
     Given User is redirected to AUT login url
@@ -12,7 +12,7 @@ Feature: Verify login and dashboard scenarios
   Scenario: Check dispatcher functionality - View Billing
     When User navigates to dispatcher page from left menu
     And User adds new load
-    And User navigates to Billing
+    And User selects load option "Billing"
     Then User should be able to view correct Summary
 
   Scenario: Check dispatcher functionality - Add Notes

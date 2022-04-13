@@ -178,6 +178,20 @@ public class Dispatcher extends PageBase implements WebLocators {
         return billing;
     }
 
+    @FindBy(xpath = PRICE)
+    private WebElement price;
+
+    public WebElement getPrice() {
+        return price;
+    }
+
+    @FindBy(xpath = SUMMARY_TOTAL)
+    private WebElement summaryTotal;
+
+    public WebElement getSummaryTotal() {
+        return summaryTotal;
+    }
+
     public void openAUT() {
         base.setupBrowser(propertyManager.getResourceBundle.getProperty("OperatingSystem"), propertyManager.getResourceBundle.getProperty("BROWSER"),
                 propertyManager.getResourceBundle.getProperty("BASE_URL"));
@@ -312,10 +326,13 @@ public class Dispatcher extends PageBase implements WebLocators {
         clickAddNote();
     }
 
-    public void redirectToBilling() {
-        base.waitForElementVisible(10, getBilling());
-        base.waitForElementToBeClickable(10, getBilling());
-        getBilling().click();
+    public void selectLoadOptions(String loadOption) {
+        List<WebElement> loadOptions = base.getdriver().findElements(By.xpath("//ul[@class='nav nav-tabs nav-tabs-custom nav-justified nav-border-bottom']/li/a/div[@class='nav-link__text']"));
+        for (WebElement option : loadOptions) {
+            if (option.getText().equalsIgnoreCase(loadOption)) {
+                option.click();
+            }
+        }
     }
 
     public boolean validateLoadCreateSuccessMessage() {
@@ -341,6 +358,18 @@ public class Dispatcher extends PageBase implements WebLocators {
         String msg = getSuccessMsg().getText();
         if (msg.equals("Successfully assign")) {
             closePopUp();
+            return true;
+        }
+        return false;
+    }
+
+    public boolean validateBillingSummary() {
+        List<WebElement> charges = driver.findElements(By.xpath("//table[@class='table table-card mb-1']/tbody/tr"));
+        String price = getPrice().getAttribute("value");
+        String summaryTotal = getSummaryTotal().getText();
+        StringBuilder MyString = new StringBuilder(summaryTotal);
+        MyString.deleteCharAt(0);
+        if (price.equals(MyString)) {
             return true;
         }
         return false;
