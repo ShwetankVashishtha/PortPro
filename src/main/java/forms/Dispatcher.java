@@ -197,6 +197,11 @@ public class Dispatcher extends PageBase implements WebLocators {
                 propertyManager.getResourceBundle.getProperty("BASE_URL"));
     }
 
+    public void closeAUT() {
+        base.clearCache();
+        base.closeBrowser();
+    }
+
     public void enterCredentials(String username, String password) {
         base.waitForElementVisible(10, getUsername());
         base.waitForElementToBeClickable(10, getUsername());
@@ -212,13 +217,6 @@ public class Dispatcher extends PageBase implements WebLocators {
         base.waitForElementToBeClickable(10, getLogin());
         getLogin().click();
         base.implicitWait(10);
-    }
-
-    public boolean verifyDashboardLogo() {
-        if (getDashboardLogo().isDisplayed()) {
-            return true;
-        }
-        return false;
     }
 
     public void redirectToDispatcher() {

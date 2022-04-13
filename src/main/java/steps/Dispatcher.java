@@ -23,12 +23,6 @@ public class Dispatcher {
         dispatcher.loginUser(username, password);
     }
 
-    @Then("User should be logged in")
-    public void verifyDashboardLogo() {
-        dispatcher = new forms.Dispatcher(base.getdriver());
-        dispatcher.verifyDashboardLogo();
-    }
-
     @When("User navigates to dispatcher page from left menu")
     public void redirectToDispatcher() {
         dispatcher = new forms.Dispatcher(base.getdriver());
@@ -45,6 +39,7 @@ public class Dispatcher {
     public void validateLoadCreateSuccessMessage() {
         dispatcher = new forms.Dispatcher(base.getdriver());
         dispatcher.validateLoadCreateSuccessMessage();
+        dispatcher.closeAUT();
     }
 
     @And("User assigns driver to load")
@@ -57,12 +52,14 @@ public class Dispatcher {
     public void validateSuccessMessage() {
         dispatcher = new forms.Dispatcher(base.getdriver());
         dispatcher.validateSuccessMessage();
+        dispatcher.closeAUT();
     }
 
     @Then("User should be able to add notes successfully")
     public void validateNoteCreateSuccessMessage() {
         dispatcher = new forms.Dispatcher(base.getdriver());
         dispatcher.validateNoteCreateSuccessMessage();
+        dispatcher.closeAUT();
     }
 
     @And("User adds notes {string}")
@@ -75,6 +72,7 @@ public class Dispatcher {
     public void validateBillingSummary() {
         dispatcher = new forms.Dispatcher(base.getdriver());
         dispatcher.validateBillingSummary();
+        dispatcher.closeAUT();
     }
 
     @And("User selects load option {string}")
