@@ -25,3 +25,15 @@ Feature: Verify dispatcher scenarios
     When User navigates to dispatcher page from left menu
     And User assigns driver to load
     Then User should be able to assign driver successfully
+    
+  Scenario: Check dispatcher functionality - Assign Route
+    When User navigates to dispatcher page from left menu
+    And User adds new load
+    And User selects load option "Routing"
+    And User selects driver "Test port"
+    And User selects date
+    And User selects pull container address "Port_1 758 N Larrabee St, Chicago, IL 60654, USA"
+    And User selects deliver load address "m6 8526 W Golf Rd, Niles, IL 60714, USA"
+    And User selects return container address "Port_1 758 N Larrabee St, Chicago, IL 60654, USA"
+    And User save the changes
+    

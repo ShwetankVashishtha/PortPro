@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import utilities.DateUtils;
 import utilities.PropertyManager;
 import wrappers.PageBase;
 import wrappers.TestBase;
@@ -192,6 +194,62 @@ public class Dispatcher extends PageBase implements WebLocators {
         return summaryTotal;
     }
 
+    @FindBy(xpath = SELECT_DRIVER_DD)
+    private WebElement selectDriverDD;
+
+    public WebElement getSelectDriverDD() {
+        return selectDriverDD;
+    }
+
+    @FindBy(xpath = SELECT_DATE)
+    private WebElement selectDate;
+
+    public WebElement getSelectDate() {
+        return selectDate;
+    }
+
+    @FindBy(xpath = SELECT_PULLCONTAINER_DD)
+    private WebElement pullContainerFromAddressDD;
+
+    public WebElement getPullContainerFromAddressDD() {
+        return pullContainerFromAddressDD;
+    }
+
+    @FindBy(xpath = SELECT_DELIVERLOAD_DD)
+    private WebElement deliverLoadToAddressDD;
+
+    public WebElement getDeliverLoadToAddressDD() {
+        return deliverLoadToAddressDD;
+    }
+
+    @FindBy(xpath = SELECT_RETURNCONTAINER_DD)
+    private WebElement returnContainerAddressDD;
+
+    public WebElement getReturnContainerAddressDD() {
+        return returnContainerAddressDD;
+    }
+
+    @FindBy(xpath = SAVE_CHANGES)
+    private WebElement btnSaveChanges;
+
+    public WebElement getBtnSaveChanges() {
+        return btnSaveChanges;
+    }
+
+    @FindBy(xpath = SAVE_CHANGES_ALERT)
+    private WebElement saveChangesAlert;
+
+    public WebElement getSaveChangesAlert() {
+        return saveChangesAlert;
+    }
+
+    @FindBy(xpath = SAVE_CHANGES_YES)
+    private WebElement btnSaveChangesYes;
+
+    public WebElement getBtnSaveChangesYes() {
+        return btnSaveChangesYes;
+    }
+
     public void openAUT() {
         base.setupBrowser(propertyManager.getResourceBundle.getProperty("OperatingSystem"), propertyManager.getResourceBundle.getProperty("BROWSER"),
                 propertyManager.getResourceBundle.getProperty("BASE_URL"));
@@ -220,14 +278,14 @@ public class Dispatcher extends PageBase implements WebLocators {
     }
 
     public void redirectToDispatcher() {
-        base.waitForElementVisible(10, getDispatcherLeftMenu());
+        base.waitForElementVisible(30, getDispatcherLeftMenu());
         base.waitForElementToBeClickable(10, getDispatcherLeftMenu());
         getDispatcherLeftMenu().click();
         base.implicitWait(10);
     }
 
     public void clickAddNewLoadButton() {
-        base.waitForElementToBeClickable(10, getAddNewLoadNutton());
+        base.waitForElementToBeClickable(30, getAddNewLoadNutton());
         getAddNewLoadNutton().click();
     }
 
@@ -270,7 +328,7 @@ public class Dispatcher extends PageBase implements WebLocators {
     }
 
     public void clickProfileLink() {
-        base.waitForElementVisible(10, getProfileLink());
+        base.waitForElementVisible(30, getProfileLink());
         base.waitForElementToBeClickable(10, getProfileLink());
         getProfileLink().click();
     }
@@ -287,10 +345,81 @@ public class Dispatcher extends PageBase implements WebLocators {
         getDriverName().click();
     }
 
-    public void selectDriver(String driverName) {
-        base.waitForElementVisible(10, getSelectDriver());
-        base.waitForElementToBeClickable(10, getSelectDriver());
-        getSelectDriver().sendKeys(driverName);
+    public void selectDriverFromDD(String driverName) {
+        base.waitForElementVisible(10, getSelectDriverDD());
+        base.waitForElementToBeClickable(10, getSelectDriverDD());
+        getSelectDriverDD().click();
+        
+        List<WebElement> Cust = driver.findElements(By.xpath("//div[@class='css-guqdj4-menu']/div/div"));
+        
+        for(WebElement ele : Cust) {
+        	
+        	if(ele.getText().equalsIgnoreCase(driverName)) {
+        		System.out.println(ele.getText());
+        		ele.click();
+        		break;
+        	}
+        }
+    }
+    
+    public void selectDate() {
+        base.waitForElementVisible(10, getSelectDate());
+        base.waitForElementToBeClickable(10, getSelectDate());
+        getSelectDate().click();
+        getSelectDate().clear();
+        String tomorrowDate = DateUtils.getFormattedDate(DateUtils.getTomorrowDate(), "MM-DD-YY h:mm a");
+        getSelectDate().sendKeys(tomorrowDate);
+    }
+
+    public void selectPullContainerFromDD(String fromAddress) {
+        base.waitForElementVisible(10, getPullContainerFromAddressDD());
+        base.waitForElementToBeClickable(10, getPullContainerFromAddressDD());
+        getPullContainerFromAddressDD().click();
+        
+        List<WebElement> fromAddresses = driver.findElements(By.xpath("//div[@class='css-guqdj4-menu']/div/div"));
+        
+        for(WebElement ele : fromAddresses) {
+        	
+        	if(ele.getText().equalsIgnoreCase(fromAddress)) {
+        		System.out.println(ele.getText());
+        		ele.click();
+        		break;
+        	}
+        }
+    }
+
+    public void selectDeliverLoadFromDD(String toAddress) {
+        base.waitForElementVisible(10, getDeliverLoadToAddressDD());
+        base.waitForElementToBeClickable(10, getDeliverLoadToAddressDD());
+        getDeliverLoadToAddressDD().click();
+        
+        List<WebElement> toAddresses = driver.findElements(By.xpath("//div[@class='css-guqdj4-menu']/div/div"));
+        
+        for(WebElement ele : toAddresses) {
+        	
+        	if(ele.getText().equalsIgnoreCase(toAddress)) {
+        		System.out.println(ele.getText());
+        		ele.click();
+        		break;
+        	}
+        }
+    }
+
+    public void selectReturnContainerFromDD(String returnAddress) {
+        base.waitForElementVisible(10, getReturnContainerAddressDD());
+        base.waitForElementToBeClickable(10, getReturnContainerAddressDD());
+        getReturnContainerAddressDD().click();
+        
+        List<WebElement> returnAddresses = driver.findElements(By.xpath("//div[@class='css-guqdj4-menu']/div/div"));
+        
+        for(WebElement ele : returnAddresses) {
+        	
+        	if(ele.getText().equalsIgnoreCase(returnAddress)) {
+        		System.out.println(ele.getText());
+        		ele.click();
+        		break;
+        	}
+        }
     }
 
     public void assignDriver(String driverName) {
@@ -325,6 +454,15 @@ public class Dispatcher extends PageBase implements WebLocators {
     }
 
     public void selectLoadOptions(String loadOption) {
+        List<WebElement> loadOptions = base.getdriver().findElements(By.xpath("//ul[@class='nav nav-tabs nav-tabs-custom nav-justified nav-border-bottom']/li/a/div[@class='nav-link__text']"));
+        for (WebElement option : loadOptions) {
+            if (option.getText().equalsIgnoreCase(loadOption)) {
+                option.click();
+            }
+        }
+    }
+
+    public void selectDriver(String loadOption) {
         List<WebElement> loadOptions = base.getdriver().findElements(By.xpath("//ul[@class='nav nav-tabs nav-tabs-custom nav-justified nav-border-bottom']/li/a/div[@class='nav-link__text']"));
         for (WebElement option : loadOptions) {
             if (option.getText().equalsIgnoreCase(loadOption)) {
@@ -368,6 +506,30 @@ public class Dispatcher extends PageBase implements WebLocators {
         StringBuilder MyString = new StringBuilder(summaryTotal);
         MyString.deleteCharAt(0);
         if (price.equals(MyString)) {
+            return true;
+        }
+        return false;
+    }
+    
+    public void clickSaveChanges() {
+        base.waitForElementVisible(10, getBtnSaveChanges());
+        base.waitForElementToBeClickable(10, getBtnSaveChanges());
+        getBtnSaveChanges().click();
+    }
+    
+    public void clickSaveChangesYes() {
+    	base.waitForElementVisible(10, getSaveChangesAlert());
+        base.waitForElementToBeClickable(10, getBtnSaveChangesYes());
+        getBtnSaveChangesYes().click();
+    }
+    
+
+    public boolean validateRouteAssignSuccessMessage() {
+        base.waitForElementVisible(10, getSuccessMsg());
+        String msg = getSuccessMsg().getText();
+        System.out.println("Message: " + msg);
+        if (msg.equals("Successfully assign")) {
+            closePopUp();
             return true;
         }
         return false;

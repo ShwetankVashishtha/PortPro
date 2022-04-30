@@ -80,4 +80,45 @@ public class Dispatcher {
         dispatcher = new forms.Dispatcher(base.getdriver());
         dispatcher.selectLoadOptions(arg0);
     }
+
+    @And("User selects driver {string}")
+    public void selectDriver(String arg0) {
+        dispatcher = new forms.Dispatcher(base.getdriver());
+        dispatcher.selectDriverFromDD(arg0);
+    }
+    
+
+    @And("User selects date")
+    public void selectDate() {
+        dispatcher = new forms.Dispatcher(base.getdriver());
+        dispatcher.selectDate();
+    }
+
+    @And("User selects pull container address {string}")
+    public void selectPullContainerAddress(String arg0) {
+        dispatcher = new forms.Dispatcher(base.getdriver());
+        dispatcher.selectPullContainerFromDD(arg0);
+    }
+    
+    @And("User selects deliver load address {string}")
+    public void selectDeliverLoadAddress(String arg0) {
+        dispatcher = new forms.Dispatcher(base.getdriver());
+        dispatcher.selectDeliverLoadFromDD(arg0);
+    }
+    
+    @And("User selects return container address {string}")
+    public void selectReturnContainerAddress(String arg0) {
+        dispatcher = new forms.Dispatcher(base.getdriver());
+        dispatcher.selectReturnContainerFromDD(arg0);
+    }
+    
+    @And("User save the changes")
+    public void saveChanges() {
+        dispatcher = new forms.Dispatcher(base.getdriver());
+        dispatcher.clickSaveChanges();
+        dispatcher.clickSaveChangesYes();
+        dispatcher.validateRouteAssignSuccessMessage();
+        dispatcher.closeAUT();
+    }
+
 }

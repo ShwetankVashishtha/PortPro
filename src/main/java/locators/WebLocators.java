@@ -26,4 +26,14 @@ public interface WebLocators {
     String BILLING = "//a[@class='nav-link active']//*[name()='svg']";
     String PRICE = "//input[@name='finalAmount']";
     String SUMMARY_TOTAL = "//div[@class='summary']//div[@class='col-6 font-size-medium font-weight-500 text-primary text-right']/span";
+    
+    
+    String SELECT_DRIVER_DD = "//div[@class='css-gdmhik-control']//div[text()='Select Driver']";
+    String SELECT_DATE = "//div[contains(@class, 'rdt w-auto')]//input";
+    String SELECT_PULLCONTAINER_DD = "//div[@class='form-group mb-0 col' and descendant::*[text()='From']]//div[@class='css-gdmhik-control']";
+    String SELECT_DELIVERLOAD_DD = "//*[@class='d-flex align-items-center mb-10' and descendant::*[text()='DELIVERLOAD']]//following-sibling::div/div[descendant::*[text()='To']]//div[@class='css-gdmhik-control']";
+    String SELECT_RETURNCONTAINER_DD = "//*[@class='d-flex align-items-center mb-10' and descendant::*[text()='RETURNCONTAINER']]//following-sibling::div/div[descendant::*[text()='To']]//div[@class='css-gdmhik-control']";
+    String SAVE_CHANGES = "//*[text()='Save Changes']";
+    String SAVE_CHANGES_ALERT = "//*[text()='Alert']";
+    String SAVE_CHANGES_YES = "//*[text()='Yes']";
 }
