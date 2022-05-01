@@ -118,7 +118,12 @@ public class Dispatcher {
         dispatcher.clickSaveChanges();
         dispatcher.clickSaveChangesYes();
         dispatcher.validateRouteAssignSuccessMessage();
-        dispatcher.closeAUT();
     }
 
+    @And("User click on Complete Load")
+    public void userClickOnCompleteLoad() {
+        dispatcher = new forms.Dispatcher(base.getdriver());
+        dispatcher.clickCompleteLoad();
+        dispatcher.clickSaveChangesYes();
+    }
 }

@@ -26,8 +26,6 @@ public interface WebLocators {
     String BILLING = "//a[@class='nav-link active']//*[name()='svg']";
     String PRICE = "//input[@name='finalAmount']";
     String SUMMARY_TOTAL = "//div[@class='summary']//div[@class='col-6 font-size-medium font-weight-500 text-primary text-right']/span";
-    
-    
     String SELECT_DRIVER_DD = "//div[@class='css-gdmhik-control']//div[text()='Select Driver']";
     String SELECT_DATE = "//div[contains(@class, 'rdt w-auto')]//input";
     String SELECT_PULLCONTAINER_DD = "//div[@class='form-group mb-0 col' and descendant::*[text()='From']]//div[@class='css-gdmhik-control']";
@@ -36,4 +34,5 @@ public interface WebLocators {
     String SAVE_CHANGES = "//*[text()='Save Changes']";
     String SAVE_CHANGES_ALERT = "//*[text()='Alert']";
     String SAVE_CHANGES_YES = "//*[text()='Yes']";
+    String COMPLETE_LOAD = "//button[@class='btn btn-outline-error-100 btn-block']";
 }

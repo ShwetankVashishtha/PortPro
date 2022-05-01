@@ -36,4 +36,5 @@ Feature: Verify dispatcher scenarios
     And User selects deliver load address "m6 8526 W Golf Rd, Niles, IL 60714, USA"
     And User selects return container address "Port_1 758 N Larrabee St, Chicago, IL 60654, USA"
     And User save the changes
+    And User click on Complete Load
     

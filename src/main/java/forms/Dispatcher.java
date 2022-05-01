@@ -250,6 +250,13 @@ public class Dispatcher extends PageBase implements WebLocators {
         return btnSaveChangesYes;
     }
 
+    @FindBy(xpath = COMPLETE_LOAD)
+    private WebElement completeLoad;
+
+    public WebElement getCompleteLoad() {
+        return completeLoad;
+    }
+
     public void openAUT() {
         base.setupBrowser(propertyManager.getResourceBundle.getProperty("OperatingSystem"), propertyManager.getResourceBundle.getProperty("BROWSER"),
                 propertyManager.getResourceBundle.getProperty("BASE_URL"));
@@ -533,5 +540,10 @@ public class Dispatcher extends PageBase implements WebLocators {
             return true;
         }
         return false;
+    }
+
+    public void clickCompleteLoad() {
+        base.waitForElementToBeClickable(10, getCompleteLoad());
+        getCompleteLoad().click();
     }
 }
