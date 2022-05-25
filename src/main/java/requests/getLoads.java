@@ -1,28 +1,49 @@
 package requests;
 
-import io.restassured.response.Response;
-import java.util.List;
 import static io.restassured.RestAssured.given;
+import static org.junit.Assert.assertEquals;
+
+import java.util.HashMap;
+
+import com.github.javafaker.Faker;
+
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 
 public class getLoads {
 
-    String requestBody = "{\n" +
-            "    \"status\":[\"PENDING\"]\n" +
-            "}";
+	String requestBody = "{\n" + "    \"status\":[\"PENDING\"]\n" + "}";
 
-    public int postRequest() {
-        Response response = given()
-                .auth()
-                .oauth2("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YzhhM2FhNjk3NjYxMDQ5YzZkYjI1N2YiLCJpYXQiOjE2NDY5NDk3OTV9.1u_ebe9r8pxYuqMznrHnJ7u3oVBJkf55tRSBaUqD1Oc")
-                .header("Content-type", "application/json")
-                .and()
-                .body(requestBody)
-                .when()
-                .post("https://stagingapi.app.portpro.io/tms/getLoads")
-                .then()
-                .extract().response();
+	public static String getToken() {
 
-        List list = response.jsonPath().getList("data.status");
-        return list.size();
-    }
+		HashMap<String, String> payLoad = new HashMap<>();
+		payLoad.put("email", "testport14@gmail.com");
+		payLoad.put("password", "123456789");
+		payLoad.put("deviceType", "WEB");
+
+		Response res = given().contentType(ContentType.JSON).baseUri("https://stagingapi.app.portpro.io").body(payLoad)
+				.when().post("/login");
+		assertEquals(res.statusCode(), 200);
+		String token = res.path("data.token");
+		System.out.println(token);
+		return token;
+	}
+
+	public static String getTotalAmount(String loadNumber) {
+
+		String token = getToken();
+		Response resp = given().auth().oauth2(token).queryParam("reference_number", loadNumber)
+				.baseUri("https://stagingapi.app.portpro.io").contentType(ContentType.JSON).when()
+				.get("/tms/getLoadDetail");
+		System.out.println(resp.asPrettyString());
+		assertEquals(resp.statusCode(), 200);
+		int totalAmount = resp.path("data.totalAmount");
+		String total_Amount = String.valueOf(totalAmount);
+		return total_Amount;
+	}
+
+	public static void main(String[] args) {
+		Faker f = new Faker();
+		System.out.println(f.address().streetAddress());
+	}
 }

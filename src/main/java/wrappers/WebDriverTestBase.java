@@ -62,4 +62,6 @@ public abstract class WebDriverTestBase {
     public abstract void waitForPageTitle(long timeout, String pageTitle);
 
     public abstract void frameToBeAvailableAndSwitch(long timeout, String frameID);
+    
+    public abstract void attributeToBe(long timeout, WebElement element, String attribute, String value);
 }

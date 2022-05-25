@@ -232,4 +232,10 @@ public class TestBase extends WebDriverTestBase {
     public void frameToBeAvailableAndSwitch(long timeout, String frameID) {
         new WebDriverWait(driver, Duration.ofSeconds(timeout)).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id(frameID)));
     }
+
+	@Override
+	public void attributeToBe(long timeout, WebElement element, String attribute, String value) {
+		// TODO Auto-generated method stub
+		new WebDriverWait(driver, Duration.ofSeconds(timeout)).until(ExpectedConditions.attributeContains(element, attribute, value));
+	}
 }
