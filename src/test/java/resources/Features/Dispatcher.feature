@@ -9,12 +9,6 @@ Feature: Verify dispatcher scenarios
     And User adds new load
     Then User should be able to add load successfully
 
-  Scenario: Check dispatcher functionality - View Billing
-    When User navigates to dispatcher page from left menu
-    And User adds new load
-    And User selects load option "Billing"
-    Then User should be able to view correct Summary
-
   Scenario: Check dispatcher functionality - Add Notes
     When User navigates to dispatcher page from left menu
     And User adds new load
@@ -49,7 +43,6 @@ Feature: Verify dispatcher scenarios
   Scenario: Check dispatcher functionality - View and add/update billing (main)
     When User navigates to dispatcher page from left menu
     And User selects any available load from list of loads
-    #And User clicks the billing tab
     And User selects load option "Billing"
     And User selects main customer
     When User clicks the add charge button
@@ -57,15 +50,14 @@ Feature: Verify dispatcher scenarios
     And User enter the amount
     And User update the changes
     Then User gets billing success message "Your pricing has been updated!"
-    And User fetchs the total ampount from billing tab
     And User removes the added bill
     And User is presented with successful pricing deletion message "Your pricing has been deleted!"
-    And User gets the updatd total amount from getLoadDetail api and verify with billing tab
+    And User fetches the total amount from billing tab
+    And User gets the update total amount from getLoadDetail api and verify with billing tab
 
   Scenario: Check dispatcher functionality - View and add/update billing (sub)
     When User navigates to dispatcher page from left menu
     And User selects any available load from list of loads
-    #And User clicks the billing tab
     And User selects load option "Billing"
     And User selects sub customer
     And User clicks add sub bill
@@ -73,48 +65,53 @@ Feature: Verify dispatcher scenarios
     And User selects random charge type from charge dropdown
     And User enter the amount
     And User update the changes
-    Then User gets billing success message for sub customer "Your pricing has been updated!"
+    Then User gets billing success message for sub customer "Updated Successfully"
     And User removes the added bill
 
   Scenario: Check dispatcher functionality - Add Payment (Main Customer)
     When User navigates to dispatcher page from left menu
     And User selects any available load from list of loads
     And User selects load option "Payment"
-    #And User navigates to payment tab
     And User clicks add payment button
     And User enters amount
     And User selects payment date
     When User clicks save payment
-    Then Payment addedd successfully
+    Then Payment added successfully
 
   Scenario: Check dispatcher functionality - Approve - Unapprove
     When User navigates to dispatcher page from left menu
-     And User selects any available load from list of loads
-     And User selects load option "Routing"
-     And User selects driver "Test port"
-     And User save the changes
-     And User click on Complete Load
-     And User selects load option "Billing"
-     And User finds that Approve and Approve and Invoice checkbox are enabled
-     And Unapproved Rebill checkbox are disabled
-     And User select checkbox "Approve"
-     And User select checkbox "Unapprove"
-     And User select checkbox "Approve & Invoice" and close email popup
-     And User select checkbox "Rebill"
+    And User selects any available load from list of loads
+    And User selects load option "Routing"
+    And User selects driver "Test port"
+    And User save the changes
+    And User click on Complete Load
+    And User selects load option "Billing"
+    And User finds that Approve and Approve and Invoice checkbox are enabled
+    And Unapproved Rebill checkbox are disabled
+    And User select checkbox "Approve"
+    And User select checkbox "Unapprove"
+    And User select checkbox "Approve & Invoice" and close email popup
+    And User select checkbox "Rebill"
 
    Scenario: Check dispatcher functionality - Document Upload
-     When User navigates to dispatcher page from left menu
-     And User selects any available load from list of loads
-     And User selects load option "Documents"
-     And User clicks document upload button
-     And User uploads a file from machine
-     And User selects the file type
-     And User save the document
+    When User navigates to dispatcher page from left menu
+    And User selects any available load from list of loads
+    And User selects load option "Documents"
+    And User clicks document upload button
+    And User uploads a file from machine
+    And User selects the file type
+    And User save the document
     
-    Scenario: Check add paymet functionality - Add Payment
-      When User navigates to Add Payments tab
-      And User selects a customer from the dropdown as "Cust_2, 14/56 INDIRA NAGAR, Hempstead, TX 77445, USA"
-      And User selects a random load available for the customer
-      And User add the payment
-      Then application displays a sussessful payment message "You have added a payment!"
+  Scenario: Check add payment functionality - Add Payment
+    When User navigates to Add Payments tab
+    And User selects a customer from the dropdown as "Cust_2, 14/56 INDIRA NAGAR, Hempstead, TX 77445, USA"
+    And User selects a random load available for the customer
+    And User add the payment
+    Then application displays a successful payment message "You have added a payment!"
+
+  Scenario: Check dispatcher functionality - View Billing
+    When User navigates to dispatcher page from left menu
+    And User adds new load
+    And User selects load option "Billing"
+    Then User should be able to view correct Summary
     

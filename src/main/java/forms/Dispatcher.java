@@ -2,6 +2,7 @@ package forms;
 
 import locators.WebLocators;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -338,7 +339,7 @@ public class Dispatcher extends PageBase implements WebLocators {
 
 	public void redirectToDispatcher() {
 		base.waitForElementVisible(30, getDispatcherLeftMenu());
-		base.waitForElementToBeClickable(10, getDispatcherLeftMenu());
+		base.waitForElementToBeClickable(30, getDispatcherLeftMenu());
 		getDispatcherLeftMenu().click();
 		base.implicitWait(10);
 	}
@@ -407,6 +408,7 @@ public class Dispatcher extends PageBase implements WebLocators {
 	public void selectDriverFromDD(String driverName) {
 		base.waitForElementVisible(10, getSelectDriverDD());
 		base.waitForElementToBeClickable(10, getSelectDriverDD());
+		base.pause(3000);
 		getSelectDriverDD().click();
 
 		List<WebElement> Cust = driver.findElements(By.xpath("//div[@class='css-guqdj4-menu']/div/div"));
@@ -603,6 +605,10 @@ public class Dispatcher extends PageBase implements WebLocators {
 	public void selectLoad() {
 
 		base.waitForElementVisible(20, getAllLoadTitle());
+		//base.getdriver().findElement(By.id("Available1")).click();
+		JavascriptExecutor js = (JavascriptExecutor) base.getdriver();
+		js.executeScript("arguments[0].click()", base.getdriver().findElement(By.id("Available1")));
+		base.pause(3000);
 		List<WebElement> loadNumbers2 = getLoadNumbers();
 		int loaNo = FunLibrary.getRandomNumber(loadNumbers2.size());
 		loadNumbers2.get(loaNo).click();

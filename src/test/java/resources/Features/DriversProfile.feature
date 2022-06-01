@@ -8,7 +8,7 @@ Feature: Check driver profile functionality
     When User redirects to Driver profile section
     And User clicks "Add New Driver" button
     When User enters FirstName, LastName, Email, Phone, Password
-    And User selecs a Username and Timezone from dropdown
+    And User selects a Username and Timezone from dropdown
     And User selects License state 
     And User provides License number
     And User clicks "Add" button

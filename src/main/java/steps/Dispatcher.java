@@ -125,7 +125,7 @@ public class Dispatcher {
 	}
 
 	@And("User click on Complete Load")
-	public void userClickOnCompleteLoad() {
+	public void userClickOnuserClickOnCompleteLoadCompleteLoad() {
 		dispatcher = new forms.Dispatcher(base.getdriver());
 		dispatcher.clickCompleteLoad();
 		dispatcher.clickSaveChangesYes();
@@ -183,7 +183,7 @@ public class Dispatcher {
 	@When("User selects random charge type from charge dropdown")
 	public void user_selects_random_charge_type_from_charge_dropdown() {
 		billingTab = new forms.BillingPage(base.getdriver());
-		billingTab.selectRandomChargetype_DD();
+		billingTab.selectRandomChargetype_DDNEW();
 	}
 
 	@When("User enter the amount")
@@ -266,8 +266,8 @@ public class Dispatcher {
 		paymentTab.savePaymentDetails();
 	}
 
-	@Then("Payment addedd successfully")
-	public void payment_addedd_successfully() {
+	@Then("Payment added successfully")
+	public void payment_added_successfully() {
 		paymentTab = new forms.PaymentPage(base.getdriver());
 		paymentTab.verifySuccessMsg_AddPayment();
 		dispatcher.closeAUT();
@@ -296,17 +296,16 @@ public class Dispatcher {
 		billingTab = new forms.BillingPage(base.getdriver());
 		billingTab.selectCheckBox(string);
 		billingTab.closeMailPopUp();
-		dispatcher.closeAUT();
 	}
 
-	@When("User fetchs the total ampount from billing tab")
-	public void user_fetchs_the_total_ampount_from_billing_tab() {
+	@When("User fetches the total amount from billing tab")
+	public void user_fetches_the_total_ampount_from_billing_tab() {
 		dispatcher = new forms.Dispatcher(base.getdriver());
 		totalBill = dispatcher.getTotalAmount();
 	}
 	
-	@Then("User gets the updatd total amount from getLoadDetail api and verify with billing tab")
-	public void user_gets_the_updatd_total_amount_from_get_load_detail_api_and_verify_with_billing_tab() {
+	@Then("User gets the update total amount from getLoadDetail api and verify with billing tab")
+	public void user_gets_the_update_total_amount_from_get_load_detail_api_and_verify_with_billing_tab() {
 		billingTab = new forms.BillingPage(base.getdriver());
 		billingTab.validateTotalAmountWithAPIresponse(totalBill);
 	}
@@ -360,8 +359,8 @@ public class Dispatcher {
 		accPage.addPayment();
 	}
 
-	@Then("application displays a sussessful payment message {string}")
-	public void application_displays_a_sussessful_payment_message(String string) {
+	@Then("application displays a successful payment message {string}")
+	public void application_displays_a_successful_payment_message(String string) {
 		accPage = new forms.AccountReceivablePage(base.getdriver());
 		accPage.verifySuccessMsg(string);
 		dispatcher.closeAUT();

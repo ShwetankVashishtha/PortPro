@@ -90,6 +90,7 @@ public class AccountReceivablePage extends PageBase implements WebLocators {
 		base.waitForElementVisible(10, getSelectCustomer_DD());
 		base.waitForElementToBeClickable(10, getSelectCustomer_DD());
 		getSelectCustomer_DD().click();
+		base.pause(3000);
 
 		List<WebElement> cust = driver.findElements(By.xpath("//div[@class='css-guqdj4-menu']/div/div"));
 

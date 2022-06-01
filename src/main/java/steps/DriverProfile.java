@@ -26,8 +26,8 @@ public class DriverProfile {
 		driverPage.enterGeneralDetails();
 	}
 
-	@When("User selecs a Username and Timezone from dropdown")
-	public void user_selecs_a_username_and_timezone_from_dropdown() {
+	@When("User selects a Username and Timezone from dropdown")
+	public void user_selects_a_username_and_timezone_from_dropdown() {
 		driverPage = new forms.DriversPage(base.getdriver());
 		driverPage.selectUserName_DD();
 		driverPage.selectTimeZone_DD();

@@ -99,7 +99,7 @@ public class PaymentPage extends PageBase implements WebLocators{
 		getAddPaymentBtn_PopUp().click();
 	}
 
-	public void verifySuccessMsg_AddPayment() {
-		base.waitForElementVisible(10, getSuccessMsg_addPayment());
+	public boolean verifySuccessMsg_AddPayment() {
+		return getAddPaymentBtn_PopUp().isDisplayed();
 	}
 }

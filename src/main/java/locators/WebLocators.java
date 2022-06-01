@@ -55,7 +55,7 @@ public interface WebLocators {
 	String UPDATEBILLINGSUCCESSMSG = "//*[contains(text(),'Your pricing has been updated!')]";
 	String ADDSUBBILL = "//button[@class='btn btn-primary']";
 	String SELECTSUBCUSTOMER_DD = "//div[text()='Select Sub Customer...']//ancestor::div[@class='css-gdmhik-control']";
-	String UPDATEBILLINGSUCCESSMSG_SUBCUSTOMER = "//*[contains(text(),'Your pricing has been updated!')]";
+	String UPDATEBILLINGSUCCESSMSG_SUBCUSTOMER = "//*[contains(text(),'Updated Successfully')]";
 	String DELETEPRICIMSG = "//*[contains(text(), 'Your pricing has been deleted!')]";
 	String APPOVED_CHECKBOX = "//input[@id='chkApproved']";
 	String APPROVED_INVOICE_CHECKBOX = "//input[@id='chkApprovedBilling']";
@@ -69,6 +69,8 @@ public interface WebLocators {
 	String PAYMENTDATE_TXTBOX = "//div[contains(@class,'rdt')]/input";
 	String ADDPAYMENTBTN_POPUP = "//button[@class='btn btn-primary' and text()='Add Payment']";
 	String SUCCESSMSG_ADDPAYMENT = "//*[contains(text()='You have added a payment')]";
+	
+	//==========CUSTOMER PAGE====================]
 	String CUSTOMER_LEFT_MENU_ICON = "(//div[contains(@class,'sidebar-item')])[8]/div[1]"; 
 	String CUSTOMER_LEFT_MENU = "//span[text()='Customers']";
 	String CUSTOMER_PROFILE = "//a[text()='Customer Profile']";
@@ -89,6 +91,8 @@ public interface WebLocators {
 	String RECEIVEREMAIL = "//input[@name='receiverEmail']";
 	String CUSTOMERFILTERBUTTON = "//h6[text()='Customers']/parent::div";
 	String SUCCESFULLYUPDATED_MSG = "//*[contains(text(),'Successfully updated')]";
+	
+	//===============DRIVER PAGE===========================
 	String DRIVER_LEFT_ICON = "(//div[contains(@class,'sidebar-item')])[6]/div[1]";
 	String DIVER_LEFT_MENU = "//span[text()='Drivers']";
 	String DRIVER_PROFILE = "//a[text()='Driver Profiles']";
@@ -102,6 +106,8 @@ public interface WebLocators {
 	String USERNAME_DD = "//label[contains(text(),'Username')]/..//following-sibling::div[1][@class='position-relative w-100']//div[@class='css-gdmhik-control']";
 	String TIMEZONE_DD = "(//label[contains(text(),'Time Zone')]/..//following-sibling::div[1]//div[@class='css-gdmhik-control'])[2]";
 	String TERMINATION_DATE = "(//label[text()='Termination Date']/..//div[contains(@class,'rdt')]/input)[2]";
+	
+	//===============APPLY PAYMENT=========================
 	String ACCOUNT_RECEIVABLE_LEFT_ICON = "(//div[contains(@class,'sidebar-item')])[4]/div[1]";
 	String ACCOUNT_RECEIVABLE_LEFT_MENU = "//span[text()='Accounts Receivable']";
 	String APPLYPAYMENTS = "//a[text()='Apply Payments']";

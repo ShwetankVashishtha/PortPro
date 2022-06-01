@@ -160,20 +160,29 @@ public class BillingPage extends PageBase implements WebLocators {
 	}
 
 	public void selectRandomChargetype_DD() {
-		base.waitForElementVisible(10, getSelectCharge_DD());
-		base.waitForElementToBeClickable(10, getSelectCharge_DD());
+		base.waitForElementVisible(20, getSelectCharge_DD());
+		base.waitForElementToBeClickable(20, getSelectCharge_DD());
 		getSelectCharge_DD().click();
-		List<WebElement> chrgeType = driver.findElements(By.xpath("//div[@class='css-1a5snlm-menu']//div"));
+		base.pause(3000);
+//		if (base.getdriver().findElement(By.xpath("//div[@class='css-guqdj4-menu']")).isDisplayed()) {
+//			List<WebElement> chrgeType = driver.findElements(By.xpath("//div[@class='css-guqdj4-menu']/div/div"));
+//			chrgeType.get(0).click();
+//		}
+			List<WebElement> chrgeType = driver.findElements(By.xpath("//div[@class='css-1a5snlm-menu']/div/div"));
+			chrgeType.get(0).click();
+	}
 
-		if (chrgeType.size() > 0) {
-
-			int randNo = FunLibrary.getRandomNumber(chrgeType.size());
-			chrgeType.get(randNo).click();
-		}
-
-		else {
-			Assert.fail("No charge type is available");
-		}
+	public void selectRandomChargetype_DDNEW() {
+		base.waitForElementVisible(20, getSelectCharge_DD());
+		base.waitForElementToBeClickable(20, getSelectCharge_DD());
+		getSelectCharge_DD().click();
+		base.pause(3000);
+//		if (base.getdriver().findElement(By.xpath("//div[@class='css-guqdj4-menu']")).isDisplayed()) {
+//			List<WebElement> chrgeType = driver.findElements(By.xpath("//div[@class='css-guqdj4-menu']/div/div"));
+//			chrgeType.get(0).click();
+//		}
+		List<WebElement> chrgeType = driver.findElements(By.xpath("//div[@class='css-guqdj4-menu']/div/div"));
+		chrgeType.get(0).click();
 	}
 
 	public void enterBillingPrice() {
@@ -202,18 +211,21 @@ public class BillingPage extends PageBase implements WebLocators {
 		base.waitForElementVisible(10, getAddSubBill());
 		base.waitForElementToBeClickable(10, getAddSubBill());
 		getAddSubBill().click();
+		base.pause(2000);
 		base.waitForElementVisible(10, getSelectSubCustomerDD());
 	}
 
 	public void selectandomSubCustomer_DD() {
 		base.waitForElementToBeClickable(10, getSelectSubCustomerDD());
 		getSelectSubCustomerDD().click();
+		base.pause(5000);
 		List<WebElement> subCustomer = driver.findElements(By.xpath("//div[@class='css-guqdj4-menu']//div"));
 
 		if (subCustomer.size() > 0) {
 
 			int randNo = FunLibrary.getRandomNumber(subCustomer.size());
 			subCustomer.get(randNo).click();
+			base.pause(5000);
 		}
 
 		else {
