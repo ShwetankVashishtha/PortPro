@@ -183,7 +183,7 @@ public class Dispatcher {
 	@When("User selects random charge type from charge dropdown")
 	public void user_selects_random_charge_type_from_charge_dropdown() {
 		billingTab = new forms.BillingPage(base.getdriver());
-		billingTab.selectRandomChargetype_DDNEW();
+		billingTab.selectRandomChargetype_DD();
 	}
 
 	@When("User enter the amount")

@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -162,27 +163,18 @@ public class BillingPage extends PageBase implements WebLocators {
 	public void selectRandomChargetype_DD() {
 		base.waitForElementVisible(20, getSelectCharge_DD());
 		base.waitForElementToBeClickable(20, getSelectCharge_DD());
+
 		getSelectCharge_DD().click();
 		base.pause(3000);
-//		if (base.getdriver().findElement(By.xpath("//div[@class='css-guqdj4-menu']")).isDisplayed()) {
-//			List<WebElement> chrgeType = driver.findElements(By.xpath("//div[@class='css-guqdj4-menu']/div/div"));
-//			chrgeType.get(0).click();
-//		}
+		try {
+				List<WebElement> chrgeType = driver.findElements(By.xpath("//div[@class='css-guqdj4-menu']/div/div"));
+				chrgeType.get(0).click();
+		}
+		catch (Exception e) {
 			List<WebElement> chrgeType = driver.findElements(By.xpath("//div[@class='css-1a5snlm-menu']/div/div"));
 			chrgeType.get(0).click();
-	}
+		}
 
-	public void selectRandomChargetype_DDNEW() {
-		base.waitForElementVisible(20, getSelectCharge_DD());
-		base.waitForElementToBeClickable(20, getSelectCharge_DD());
-		getSelectCharge_DD().click();
-		base.pause(3000);
-//		if (base.getdriver().findElement(By.xpath("//div[@class='css-guqdj4-menu']")).isDisplayed()) {
-//			List<WebElement> chrgeType = driver.findElements(By.xpath("//div[@class='css-guqdj4-menu']/div/div"));
-//			chrgeType.get(0).click();
-//		}
-		List<WebElement> chrgeType = driver.findElements(By.xpath("//div[@class='css-guqdj4-menu']/div/div"));
-		chrgeType.get(0).click();
 	}
 
 	public void enterBillingPrice() {
@@ -210,7 +202,9 @@ public class BillingPage extends PageBase implements WebLocators {
 	public void clickAddSubBill() {
 		base.waitForElementVisible(10, getAddSubBill());
 		base.waitForElementToBeClickable(10, getAddSubBill());
-		getAddSubBill().click();
+		base.pause(2000);
+		JavascriptExecutor js = (JavascriptExecutor) base.getdriver();
+		js.executeScript("arguments[0].click()", getAddSubBill());
 		base.pause(2000);
 		base.waitForElementVisible(10, getSelectSubCustomerDD());
 	}

@@ -6,7 +6,7 @@ public interface WebLocators {
 	String PASSWORD = "//input[@placeholder='Password*']";
 	String LOGIN = "//button[@type='submit']";
 	String DASHBOARD_LOGO = "//img[@class='navbar-brand__logo-big' and @src='https://axle-logistics.s3.amazonaws.com/carrier/11.jpeg']";
-	String DISPATCHER_LEFT_MENU = "//a[@class='sidebar-link' and @href='/tms/Dispatcher']";
+	String DISPATCHER_LEFT_MENU = "//a[@class='sidebar-link active' and @href='/tms/Dispatcher']";
 	String ADD_NEW_LOAD_BUTTON = "//button[@class='btn btn-success']";
 	String CUSTOMER_DROPDOWN = "//label[text()=' Customer']/following-sibling::div";
 	String PORT_DROPDOWN = "//label[text()='Port']/following-sibling::div";
@@ -103,7 +103,7 @@ public interface WebLocators {
 	String PASSWORD_ADDDRIVER = "(//input[@name='password'])[2]";
 	String LICENSENUMBER = "(//input[@name='licenceNumber'])[2]";
 	String LICENSESTATE = "(//label[contains(text(),'License State')]/..//following-sibling::div[1]//div[@class='css-1pcexqc-container'])[2]";
-	String USERNAME_DD = "//label[contains(text(),'Username')]/..//following-sibling::div[1][@class='position-relative w-100']//div[@class='css-gdmhik-control']";
+	String USERNAME_DD = "(//input[@name='username'])[2]";
 	String TIMEZONE_DD = "(//label[contains(text(),'Time Zone')]/..//following-sibling::div[1]//div[@class='css-gdmhik-control'])[2]";
 	String TERMINATION_DATE = "(//label[text()='Termination Date']/..//div[contains(@class,'rdt')]/input)[2]";
 	

@@ -150,23 +150,27 @@ public class DriversPage extends PageBase implements WebLocators{
 	}
 	
 	public void selectUserName_DD() {
+		base.waitForElementVisible(10, getUserName_DD());
+
 		base.waitForElementToBeClickable(10, getUserName_DD());
-		getUserName_DD().click();
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		List<WebElement> usernames = driver.findElements(By.xpath("//div[@class='css-guqdj4-menu']/div/div"));
-		if(usernames.size()>0) {
-			
-			usernames.get(FunLibrary.getRandomNumber(usernames.size()-1)).click();
-		}
-		else {
-			
-			Assert.fail("No username is available");
-		}
+		getUserName_DD().sendKeys(new Faker().name().username());
+//		base.waitForElementToBeClickable(10, getUserName_DD());
+//		getUserName_DD().click();
+//		try {
+//			Thread.sleep(5000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		List<WebElement> usernames = driver.findElements(By.xpath("//div[@class='css-guqdj4-menu']/div/div"));
+//		if(usernames.size()>0) {
+//
+//			usernames.get(FunLibrary.getRandomNumber(usernames.size()-1)).click();
+//		}
+//		else {
+//
+//			Assert.fail("No username is available");
+//		}
 	}
 	
 	public void selectTimeZone_DD() {
