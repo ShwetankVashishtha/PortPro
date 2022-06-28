@@ -6,7 +6,7 @@ public interface WebLocators {
 	String PASSWORD = "//input[@placeholder='Password*']";
 	String LOGIN = "//button[@type='submit']";
 	String DASHBOARD_LOGO = "//img[@class='navbar-brand__logo-big' and @src='https://axle-logistics.s3.amazonaws.com/carrier/11.jpeg']";
-	String DISPATCHER_LEFT_MENU = "//a[@class='sidebar-link active' and @href='/tms/Dispatcher']";
+	String DISPATCHER_LEFT_MENU = "//a[contains(@class,'sidebar-link') and @href='/tms/Dispatcher']";//"//a[@class='sidebar-link active' and @href='/tms/Dispatcher']";
 	String ADD_NEW_LOAD_BUTTON = "//button[@class='btn btn-success']";
 	String CUSTOMER_DROPDOWN = "//label[text()=' Customer']/following-sibling::div";
 	String PORT_DROPDOWN = "//label[text()='Port']/following-sibling::div";
@@ -91,6 +91,12 @@ public interface WebLocators {
 	String RECEIVEREMAIL = "//input[@name='receiverEmail']";
 	String CUSTOMERFILTERBUTTON = "//h6[text()='Customers']/parent::div";
 	String SUCCESFULLYUPDATED_MSG = "//*[contains(text(),'Successfully updated')]";
+	String LOAD_NUMBER = "//h5[@class='mb-0 mr-2']";
+	String SEARCH_CUSTOMER = "//input[@id='customerSearchInput']";
+	String DELETECUSTOMER_BTN = "(//*[@class='btn btn-none text-muted'])[2]";
+	String DELETECSOMER_POPUPBTN = "//button[text()='Yes']";
+	String CUSTOMERS_COUNT = "//h6[text()='Customers']//preceding-sibling::div";
+	String BACKBUTTON = "//div[@class='d-flex flex-row align-items-center']/button";
 	
 	//===============DRIVER PAGE===========================
 	String DRIVER_LEFT_ICON = "(//div[contains(@class,'sidebar-item')])[6]/div[1]";
@@ -106,6 +112,11 @@ public interface WebLocators {
 	String USERNAME_DD = "(//input[@name='username'])[2]";
 	String TIMEZONE_DD = "(//label[contains(text(),'Time Zone')]/..//following-sibling::div[1]//div[@class='css-gdmhik-control'])[2]";
 	String TERMINATION_DATE = "(//label[text()='Termination Date']/..//div[contains(@class,'rdt')]/input)[2]";
+	String EDIT_DRIVER = "//table[@class='table table-card']//td[1]/button";
+	String ONHOLD_STATUS = "//h3[text()='ON HOLD']";
+	String ONHOLD_BUTTON = "//input[@name='accountHold']";
+	String DRIVERONHOLD_LABEL = "//label[text()='Driver On Hold']";
+	String DRIVERTYPE_DROPDOWN = "//*[@class='css-gdmhik-control']";
 	
 	//===============APPLY PAYMENT=========================
 	String ACCOUNT_RECEIVABLE_LEFT_ICON = "(//div[contains(@class,'sidebar-item')])[4]/div[1]";

@@ -1,30 +1,28 @@
 package forms;
 
 import locators.WebLocators;
+import requests.getLoads;
+
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import groovyjarjarantlr4.v4.runtime.misc.Func1;
 import utilities.DateUtils;
 import utilities.FunLibrary;
 import utilities.PropertyManager;
 import wrappers.PageBase;
 import wrappers.TestBase;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
 import java.util.List;
 
 public class Dispatcher extends PageBase implements WebLocators {
 
 	PropertyManager propertyManager = new PropertyManager();
 	TestBase base = new TestBase();
+	static String load_Number = null;
 
 	/**
 	 * Instantiates a new adds the feedback page.
@@ -300,6 +298,13 @@ public class Dispatcher extends PageBase implements WebLocators {
 	public WebElement getUploadFileArea() {
 		return uploadFileArea;
 	}
+	
+	@FindBy(xpath=LOAD_NUMBER)
+	private WebElement loadNumber;
+
+	public WebElement getLoadNumber() {
+		return loadNumber;
+	}
 
 	public PropertyManager getPropertyManager() {
 		return propertyManager;
@@ -535,12 +540,18 @@ public class Dispatcher extends PageBase implements WebLocators {
 	}
 
 	public boolean validateLoadCreateSuccessMessage() {
-		base.waitForElementVisible(10, getLoadCreateSuccessMsg());
-		String msg = getLoadCreateSuccessMsg().getText();
-		if (msg.equals("Load created")) {
+		base.waitForElementVisible(10, getLoadNumber());
+		boolean loadNum = getLoadNumber().isDisplayed();
+		
+		if(loadNum) {
+			load_Number = getLoadNumber().getText().trim();
 			return true;
 		}
-		return false;
+		else {
+			Assert.fail();
+			return false;
+		}
+		
 	}
 
 	public boolean validateNoteCreateSuccessMessage() {
@@ -605,7 +616,7 @@ public class Dispatcher extends PageBase implements WebLocators {
 	public void selectLoad() {
 
 		base.waitForElementVisible(20, getAllLoadTitle());
-		//base.getdriver().findElement(By.id("Available1")).click();
+		// base.getdriver().findElement(By.id("Available1")).click();
 		JavascriptExecutor js = (JavascriptExecutor) base.getdriver();
 		js.executeScript("arguments[0].click()", base.getdriver().findElement(By.id("Available1")));
 		base.pause(3000);
@@ -625,7 +636,8 @@ public class Dispatcher extends PageBase implements WebLocators {
 
 		base.waitForElementVisible(10, getSummaryTotal());
 		String total = getSummaryTotal().getText().replace("$", "").trim();
-		total = total.replace(".00", "");
+		//total = total.replace(".00", "");
+		total = total.replace(",", "");
 		// --Operation on UI are very fae so to verify the update and delete messages
 		// put 5 sec wait
 		try {
@@ -646,8 +658,10 @@ public class Dispatcher extends PageBase implements WebLocators {
 
 	public void uploadFile() {
 
-		String filePath = System.getProperty("user.dir") + "/src/main/resources/Upload.csv";
+		String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\Upload.csv";
 		base.waitForElementVisible(15, getUploadFileArea());
+		base.waitForElementToBeClickable(15, getUploadFileArea());
+		System.out.println(filePath);
 		getUploadFileArea().sendKeys(filePath);
 		// 5 scond wait for completing the file upload
 		try {
@@ -681,11 +695,18 @@ public class Dispatcher extends PageBase implements WebLocators {
 			doc.get(FunLibrary.getRandomNumber(doc.size())).click();
 		}
 	}
-	
+
 	public void saveDocuments() {
-		
+
 		base.waitForElementVisible(10, getAddNoteBtn());
 		base.waitForElementToBeClickable(10, getAddNoteBtn());
 		getAddNoteBtn().click();
+	}
+	
+	public void deleteLoad() {
+		System.out.println("=======>" +load_Number);
+		load_Number = load_Number.replace("Load #:", "").trim();
+		getLoads.deleteCreatedLoad(load_Number);
+		
 	}
 }

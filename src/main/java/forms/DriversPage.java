@@ -22,7 +22,10 @@ import wrappers.PageBase;
 import wrappers.TestBase;
 
 public class DriversPage extends PageBase implements WebLocators{
-
+	
+	public static String email_id = null;
+	CustomerPage custPage = null;
+	
 	public DriversPage(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
@@ -70,7 +73,38 @@ public class DriversPage extends PageBase implements WebLocators{
     @FindBy(xpath = TERMINATION_DATE)
     private WebElement terminationDate;
     
-    public WebElement getTerminationDate() {
+    @FindBy(xpath = EDIT_DRIVER)
+    private WebElement editDriver;
+    
+    @FindBy(xpath = ONHOLD_STATUS)
+    private WebElement onHoldStatuss;
+    
+    @FindBy(xpath = ONHOLD_BUTTON)
+    private WebElement onHoldButton;
+    
+    @FindBy(xpath = DRIVERONHOLD_LABEL)
+    private WebElement driverOnHold_label;
+    
+    @FindBy(xpath = DRIVERTYPE_DROPDOWN)
+    private WebElement drivertype_dropdown;
+    
+    public WebElement getOnHoldStatuss() {
+		return onHoldStatuss;
+	}
+
+	public WebElement getOnHoldButton() {
+		return onHoldButton;
+	}
+
+	public WebElement getDriverOnHold_label() {
+		return driverOnHold_label;
+	}
+
+	public WebElement getEditDriver() {
+		return editDriver;
+	}
+
+	public WebElement getTerminationDate() {
 		return terminationDate;
 	}
 
@@ -132,19 +166,24 @@ public class DriversPage extends PageBase implements WebLocators{
 		base.waitForElementToBeClickable(10, getDriverProfile());
 		action.moveToElement(getDriverProfile()).click().build().perform();
 		base.waitForElementVisible(10, getDriverProfile());
+		action.moveToElement(getDrivertype_dropdown()).build().perform();
     }
 	
+	public WebElement getDrivertype_dropdown() {
+		return drivertype_dropdown;
+	}
+
 	public void enterGeneralDetails() {
 		Faker faker = new Faker();
 		String fname = faker.name().firstName();
 		String lname = faker.name().lastName();
-		String email = fname+lname+"@test.com";
+		email_id = fname+lname+"@test.com";
 		String mobileNo = faker.phoneNumber().cellPhone();
 		base.waitForElementVisible(20, getFirstName());
 		base.waitForElementToBeClickable(10, getFirstName());
 		getFirstName().sendKeys(fname);
 		getLastName().sendKeys(lname);
-		getEmail().sendKeys(email);
+		getEmail().sendKeys(email_id);
 		getMobile().sendKeys(mobileNo);
 		getPassword().sendKeys("123456789");
 	}
@@ -225,5 +264,41 @@ public class DriversPage extends PageBase implements WebLocators{
 		WebElement ele = driver.findElement(By.xpath("//*[contains(text(),'"+str+"')]"));
 		base.waitForElementVisible(15, ele);
 		assertEquals(ele.getText().trim(), str);
+	}
+	
+	public void searchDriver(String text) {
+		
+		custPage = new CustomerPage(driver);
+		base.waitForElementToBeClickable(15, custPage.getSearchCustomer());
+		custPage.getSearchCustomer().clear();
+		custPage.getSearchCustomer().sendKeys(text);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void verifyDriver_Not_On_Hold() {
+	
+		base.waitForElementToBeClickable(15, getEditDriver());
+		getEditDriver().click();
+		base.waitForElementVisible(10, getDriverOnHold_label());
+		try {
+			
+			boolean onHoldStatus = getOnHoldStatuss().isDisplayed();
+			if(onHoldStatus == true) {
+				getOnHoldButton().click();
+			}
+			else {
+				System.out.println("Driver is not on Hold");
+			}
+		}
+		
+		catch(Exception e) {
+			System.out.println("Driver is not on Hold");
+		}
+		
 	}
 }

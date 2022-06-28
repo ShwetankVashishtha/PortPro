@@ -1,5 +1,6 @@
 package steps;
 
+import forms.DriversPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -14,6 +15,7 @@ public class Dispatcher {
 	forms.BillingPage billingTab;
 	forms.PaymentPage paymentTab;
 	forms.AccountReceivablePage accPage;
+	DriversPage driverPage;
 	static String totalBill = null;
 
 	@Given("User is redirected to AUT login url")
@@ -44,7 +46,7 @@ public class Dispatcher {
 	public void validateLoadCreateSuccessMessage() {
 		dispatcher = new forms.Dispatcher(base.getdriver());
 		dispatcher.validateLoadCreateSuccessMessage();
-		dispatcher.closeAUT();
+		//dispatcher.closeAUT();
 	}
 
 	@And("User assigns driver to load")
@@ -364,5 +366,32 @@ public class Dispatcher {
 		accPage = new forms.AccountReceivablePage(base.getdriver());
 		accPage.verifySuccessMsg(string);
 		dispatcher.closeAUT();
+	}
+	
+	@Then("User deletes the created load")
+	public void user_deletes_the_created_load() {
+		dispatcher = new forms.Dispatcher(base.getdriver());
+		dispatcher.deleteLoad();
+	}
+	
+	@When("User search the driver with username {string}")
+	public void user_search_the_driver_with_username(String string) {
+		
+		driverPage = new DriversPage(base.getdriver());
+		driverPage.searchDriver(string);
+	}
+
+	@When("User verify that driver is not on hold")
+	public void user_verify_that_driver_is_not_on_hold() {
+	    
+		driverPage = new DriversPage(base.getdriver());
+		driverPage.verifyDriver_Not_On_Hold();
+	}
+	
+	@Then("User adds {string} random charges and remove them")
+	public void user_adds_random_charges_and_remove_them(String string) {
+		
+		billingTab = new forms.BillingPage(base.getdriver());
+		billingTab.addMultipleCharges(string);
 	}
 }

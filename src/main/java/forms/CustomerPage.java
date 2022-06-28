@@ -1,5 +1,6 @@
 package forms;
 
+
 import static org.junit.Assert.assertEquals;
 
 import java.util.List;
@@ -8,11 +9,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.Pause;
 import org.openqa.selenium.support.FindBy;
 
 import com.github.javafaker.Faker;
 
 import locators.WebLocators;
+import requests.getLoads;
 import utilities.FunLibrary;
 import utilities.PropertyManager;
 import wrappers.PageBase;
@@ -28,6 +31,7 @@ public class CustomerPage extends PageBase implements WebLocators {
 	PropertyManager propertyManager = new PropertyManager();
 	TestBase base = new TestBase();
 	Faker fake = new Faker();
+	public static String company_Name = null;
 	
 	@FindBy(xpath = CUSTOMER_LEFT_MENU_ICON)
 	private WebElement customerleftMenuIcon;
@@ -85,9 +89,45 @@ public class CustomerPage extends PageBase implements WebLocators {
 	
 	@FindBy(xpath = SUCCESFULLYUPDATED_MSG)
 	private WebElement successfulUpdateMessage;
+	
+	@FindBy(xpath=SEARCH_CUSTOMER)
+	private WebElement searchCustomer;
+	
+	@FindBy(xpath = DELETECSOMER_POPUPBTN)
+	private WebElement deleteCustomer_popupBtn;
+	
+	@FindBy(xpath=CUSTOMERS_COUNT)
+	private WebElement cutomersCount;
+	
+	@FindBy(xpath=BACKBUTTON)
+	private WebElement backButton;
+
+	public WebElement getBackButton() {
+		return backButton;
+	}
+
+	public WebElement getCutomersCount() {
+		return cutomersCount;
+	}
+
+	public WebElement getDeleteCustomer_popupBtn() {
+		return deleteCustomer_popupBtn;
+	}
+
+	public WebElement getSearchCustomer() {
+		return searchCustomer;
+	}
+
+	public void setSearchCustomer(WebElement searchCustomer) {
+		this.searchCustomer = searchCustomer;
+	}
 
 	public WebElement getSuccessfulUpdateMessage() {
 		return successfulUpdateMessage;
+	}
+
+	public WebElement getDeleteCustomer() {
+		return deleteCustomer;
 	}
 
 	public WebElement getCustomerFilterBtn() {
@@ -104,6 +144,9 @@ public class CustomerPage extends PageBase implements WebLocators {
 
 	@FindBy(xpath = CUSTOMERADDEDMESSAGE)
 	private WebElement addCustomerMessage;
+	
+	@FindBy(xpath=DELETECUSTOMER_BTN)
+	private WebElement deleteCustomer;
 
 	public WebElement getAddCustomerMessage() {
 		return addCustomerMessage;
@@ -197,10 +240,11 @@ public class CustomerPage extends PageBase implements WebLocators {
 	}
 
 	public void enterCustomerDetails() throws InterruptedException {
+		company_Name = fake.company().name();
 		base.waitForElementVisible(10, getCompanyName());
 		base.waitForElementToBeClickable(10, getCompanyName());
 
-		getCompanyName().sendKeys(fake.company().name());
+		getCompanyName().sendKeys(company_Name);
 		enterAddressDetails();
 
 		getEmail().sendKeys(fake.name().firstName() + fake.name().lastName() + "@getnada.com");
@@ -210,7 +254,7 @@ public class CustomerPage extends PageBase implements WebLocators {
 
 	public void enterAddressDetails() throws InterruptedException {
 		getAddress().sendKeys("1 World Way, Los Angeles, CA, USA");
-		Thread.sleep(1000);
+		Thread.sleep(10000);
 		List<WebElement> ele = driver.findElements(By.xpath("//div[@class='react-mapbox-ac-suggestion']"));
 		if (ele.size() > 0) {
 			ele.get(0).click();
@@ -234,6 +278,7 @@ public class CustomerPage extends PageBase implements WebLocators {
 		Faker faker = new Faker();
 		base.waitForElementVisible(10, getReceiverEmail());
 		base.waitForElementToBeClickable(10, getReceiverEmail());
+		getReceiverEmail().clear();
 		getReceiverEmail().sendKeys(faker.name().firstName()+"@test.com");
 	}
 	
@@ -251,12 +296,46 @@ public class CustomerPage extends PageBase implements WebLocators {
 			editCust.get(FunLibrary.getRandomNumber(editCust.size()-1)).click();
 			base.waitForElementVisible(10, getCompanyName());
 			base.waitForElementToBeClickable(10, getCompanyName());
+			company_Name = getCompanyName().getAttribute("value").trim();
+			System.out.println(company_Name);
 		}
 	}
 	
 	public void verifyUserUpdatedMessage(String msgs) {
 		base.waitForElementVisible(10, getSuccessfulUpdateMessage());
 		assertEquals(getSuccessfulUpdateMessage().getText().trim(), msgs);
+	}
+	
+	public void deleteCreatedCustomer() {
+		
+		//getLoads.deleteCustomer(company_Name);
+		base.waitForElementVisible(10, getSearchCustomer());
+		getSearchCustomer().sendKeys(company_Name);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		base.waitForElementToBeClickable(15, getDeleteCustomer());
+		getDeleteCustomer().click();
+		base.waitForElementToBeClickable(15, getDeleteCustomer_popupBtn());
+		getDeleteCustomer_popupBtn().click();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String attribute = getCutomersCount().getText().trim();
+		assertEquals(attribute, "0");
+	}
+	
+	public void navigateBacktoCustomerList() {
+		
+		base.waitForElementVisible(10, getBackButton());
+		getBackButton().click();
 	}
 	
 }

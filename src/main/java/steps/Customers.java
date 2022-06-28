@@ -49,7 +49,7 @@ public class Customers {
 		customerPage = new forms.CustomerPage(base.getdriver());
 		customerPage.addedCustomer_successMsg(string);
 		dispatcher = new forms.Dispatcher(base.getdriver());
-		dispatcher.closeAUT();
+		//dispatcher.closeAUT();
 	}
 	
 	@When("User filters the list to get all customers")
@@ -75,6 +75,16 @@ public class Customers {
 		customerPage = new forms.CustomerPage(base.getdriver());
 		customerPage.verifyUserUpdatedMessage(string);
 		dispatcher = new forms.Dispatcher(base.getdriver());
-		dispatcher.closeAUT();
+	}
+	
+	@Then("User delete the created customer")
+	public void user_delete_the_created_customer() {
+	  customerPage.deleteCreatedCustomer();
+	  dispatcher.closeAUT();
+	}
+	
+	@When("User redirects to Customer list")
+	public void user_redirects_to_customer_list() {
+	 customerPage.navigateBacktoCustomerList();
 	}
 }

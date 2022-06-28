@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -73,7 +74,7 @@ public class BillingPage extends PageBase implements WebLocators {
 
 	@FindBy(xpath = REBILL_CHECKBOX)
 	private WebElement rebillCheckbox;
-	
+
 	@FindBy(xpath = CANELBTN_SENDMAIL)
 	private WebElement cancelButton;
 
@@ -167,12 +168,13 @@ public class BillingPage extends PageBase implements WebLocators {
 		getSelectCharge_DD().click();
 		base.pause(3000);
 		try {
-				List<WebElement> chrgeType = driver.findElements(By.xpath("//div[@class='css-guqdj4-menu']/div/div"));
-				chrgeType.get(0).click();
-		}
-		catch (Exception e) {
-			List<WebElement> chrgeType = driver.findElements(By.xpath("//div[@class='css-1a5snlm-menu']/div/div"));
+
+			List<WebElement> chrgeType = driver.findElements(By.xpath("//div[@class='css-guqdj4-menu']/div/div"));
 			chrgeType.get(0).click();
+		} catch (Exception e) {
+
+			List<WebElement> chrgeType = driver.findElements(By.xpath("//div[@class='css-1a5snlm-menu']/div/div"));
+			chrgeType.get(10).click();
 		}
 
 	}
@@ -269,19 +271,58 @@ public class BillingPage extends PageBase implements WebLocators {
 			element.click();
 		}
 	}
-	
+
 	public void closeMailPopUp() {
 		base.waitForElementVisible(10, getCancelButton());
 		base.waitForElementToBeClickable(10, getCancelButton());
 		getCancelButton().click();
 	}
-	
+
 	public void validateTotalAmountWithAPIresponse(String tBill) {
 		String loadNumber = driver.findElement(By.tagName("h5")).getText().trim();
 		loadNumber = loadNumber.replace("Load #: ", "").trim();
 		String totalAmount_api = getLoads.getTotalAmount(loadNumber);
-		System.out.println("API ==>" +totalAmount_api + " UI==>" +tBill);
+		System.out.println("API ==>" + totalAmount_api + " UI==>" + tBill);
 		assertEquals(tBill, totalAmount_api);
-		
+
+	}
+
+	public void addMultipleCharges(String text) {
+
+		Dispatcher dispatcher = new Dispatcher(driver);
+		for (int i = 0; i < Integer.parseInt(text); i++) {
+
+			// selectRandomChargetype_DD();
+			driver.findElement(By.xpath(
+					"(//div[text()='Select...']//ancestor::div[@class='css-1pcexqc-container'])[" + (i + 1) + "]"))
+					.click();
+			base.pause(3000);
+			try {
+
+				List<WebElement> chrgeType = driver.findElements(By.xpath("//div[@class='css-guqdj4-menu']/div/div"));
+				chrgeType.get(0+i).click();
+			} catch (Exception e) {
+
+				List<WebElement> chrgeType = driver.findElements(By.xpath("//div[@class='css-1a5snlm-menu']/div/div"));
+				chrgeType.get(10).click();
+			}
+
+			enterBillingPrice();
+			dispatcher.updateChanges();
+			base.pause(5000);
+			if (i != Integer.parseInt(text) - 1) {
+				driver.findElement(By.xpath("//a[text()='Add Charge']")).click();
+			}
+
+			// clickAddChargeButton();
+		}
+
+		List<WebElement> delBtn = driver
+				.findElements(By.xpath("(//button[@class='btn btn-xs btn-circle bg-soft-danger'])"));
+		for (int j = delBtn.size()-1; j >= 0; j--) {
+
+			delBtn.get(j).click();
+			base.pause(3000);
+		}
 	}
 }
