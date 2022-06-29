@@ -658,7 +658,7 @@ public class Dispatcher extends PageBase implements WebLocators {
 
 	public void uploadFile() {
 
-		String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\Upload.csv";
+		String filePath = propertyManager.getResourceBundle.getProperty("FILE_PATH");
 		base.waitForElementVisible(15, getUploadFileArea());
 		base.waitForElementToBeClickable(15, getUploadFileArea());
 		System.out.println(filePath);

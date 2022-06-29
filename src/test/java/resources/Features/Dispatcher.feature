@@ -44,7 +44,6 @@ Feature: Verify dispatcher scenarios
     When User navigates to dispatcher page from left menu
     And User adds new load
     Then User should be able to add load successfully
-    #And User selects any available load from list of loads
     And User selects the chassis pickup location "m6 8526 W Golf Rd, Niles, IL 60714, USA"
     And User selects the chassis termination location "m7 2237 Mason Street, San Francisco"
     And User update the changes
@@ -55,7 +54,6 @@ Feature: Verify dispatcher scenarios
     When User navigates to dispatcher page from left menu
     And User adds new load
     Then User should be able to add load successfully
-    #And User selects any available load from list of loads
     And User selects load option "Billing"
     And User selects main customer
     When User clicks the add charge button
@@ -73,22 +71,15 @@ Feature: Verify dispatcher scenarios
     When User navigates to dispatcher page from left menu
     And User adds new load
     Then User should be able to add load successfully
-    #And User selects any available load from list of loads
     And User selects load option "Billing"
     And User selects sub customer
     And User clicks add sub bill
     And User selects sub customer from dropdown
     And User adds "3" random charges and remove them
-    #And User selects random charge type from charge dropdown
-    #And User enter the amount
-    #And User update the changes
-    #Then User gets billing success message for sub customer "Updated Successfully"
-    #And User removes the added bill
     And User deletes the created load
 
   Scenario: Check dispatcher functionality - Add Payment (Main Customer)
     When User navigates to dispatcher page from left menu
-    #And User selects any available load from list of loads
     And User adds new load
     Then User should be able to add load successfully
     And User selects load option "Payment"
@@ -100,12 +91,14 @@ Feature: Verify dispatcher scenarios
     And User deletes the created load
 
   Scenario: Check dispatcher functionality - Approve - Unapprove
+    When User redirects to Driver profile section
+    And User search the driver with username "3271010573"
+    And User verify that driver is not on hold
     When User navigates to dispatcher page from left menu
     And User adds new load
     Then User should be able to add load successfully
-    #And User selects any available load from list of loads
     And User selects load option "Routing"
-    And User selects driver "Test port"
+    And User selects driver "Irwin Cremin"
     And User save the changes
     And User click on Complete Load
     And User selects load option "Billing"
@@ -117,12 +110,10 @@ Feature: Verify dispatcher scenarios
     And User select checkbox "Rebill"
     And User deletes the created load
 
-	#Issue, can not uplad document
   Scenario: Check dispatcher functionality - Document Upload
     When User navigates to dispatcher page from left menu
     And User adds new load
     Then User should be able to add load successfully
-    #And User selects any available load from list of loads
     And User selects load option "Documents"
     And User clicks document upload button
     And User uploads a file from machine
@@ -130,7 +121,6 @@ Feature: Verify dispatcher scenarios
     And User save the document
     And User deletes the created load
 
-  #Issue, liscense to add payent ha been expired
   Scenario: Check add payment functionality - Add Payment
     When User navigates to Add Payments tab
     And User selects a customer from the dropdown as "Cust_2, 14/56 INDIRA NAGAR, Hempstead, TX 77445, USA"
