@@ -27,7 +27,7 @@ public class getLoads {
 		payLoad.put("password", "123456789");
 		payLoad.put("deviceType", "WEB");
 
-		Response res = given().contentType(ContentType.JSON).baseUri("https://stagingapi.app.portpro.io").body(payLoad)
+		Response res = given().contentType(ContentType.JSON).baseUri("https://app.portpro.io/").body(payLoad)
 				.when().post("/login");
 		assertEquals(res.statusCode(), 200);
 		String token = res.path("data.token");
@@ -39,7 +39,7 @@ public class getLoads {
 
 		String load_ID = null;
 		String token = getToken();
-		Response resp = given().auth().oauth2(token).baseUri("https://stagingapi.app.portpro.io")
+		Response resp = given().auth().oauth2(token).baseUri("https://app.portpro.io/")
 				.contentType(ContentType.JSON).when().get("/tms/getLoads");
 		assertEquals(resp.statusCode(), 200);
 		String load_num = resp.path("data[0].reference_number");
@@ -49,7 +49,7 @@ public class getLoads {
 			System.out.println("=====>" + load_ID);
 			HashMap<String, String> id = new HashMap<String, String>();
 			id.put("_id", load_ID);
-			Response deleteLoad = given().auth().oauth2(token).body(id).baseUri("https://stagingapi.app.portpro.io")
+			Response deleteLoad = given().auth().oauth2(token).body(id).baseUri("https://app.portpro.io/")
 					.when().post("/tms/removeLoad");
 			System.out.println(deleteLoad);
 			assertEquals(deleteLoad.statusCode(), 200);
@@ -62,7 +62,7 @@ public class getLoads {
 
 		String token = getToken();
 		Response resp = given().auth().oauth2(token).queryParam("reference_number", loadNumber)
-				.baseUri("https://stagingapi.app.portpro.io").contentType(ContentType.JSON).when()
+				.baseUri("https://app.portpro.io/").contentType(ContentType.JSON).when()
 				.get("/tms/getLoadDetail");
 		System.out.println(resp.asPrettyString());
 		assertEquals(resp.statusCode(), 200);
@@ -75,7 +75,7 @@ public class getLoads {
 		System.out.println("********" +email);
 		String driverId = null;
 		String token = getToken();
-		Response resp = given().auth().oauth2(token).baseUri("https://stagingapi.app.portpro.io")
+		Response resp = given().auth().oauth2(token).baseUri("https://app.portpro.io/")
 				.contentType(ContentType.JSON).when().get("/carrier/getAllDriver");
 		assertEquals(resp.statusCode(), 200);
 		
@@ -89,7 +89,7 @@ public class getLoads {
 				HashMap<String, String> id = new HashMap<>();
 				id.put("_id", driverId);
 				id.put("isDeleted", "true");
-				Response deleteDriver = given().auth().oauth2(token).body(id).baseUri("https://stagingapi.app.portpro.io").log().all()
+				Response deleteDriver = given().auth().oauth2(token).body(id).baseUri("https://app.portpro.io/").log().all()
 						.when().delete("/carrier/deleteDriverProfile");
 				assertEquals(deleteDriver.statusCode(), 200);
 				System.out.println("Driver deleted successfully");
@@ -107,7 +107,7 @@ public class getLoads {
 		RequestSpecBuilder build = new RequestSpecBuilder().setUrlEncodingEnabled(false);
 		AuthenticationScheme auth = RestAssured.oauth2(token);
 		build.setAuth(auth);
-		build.setBaseUri("https://stagingapi.app.portpro.io");
+		build.setBaseUri("https://app.portpro.io/");
 		build.setBasePath("carrier/getTMSCustomers");
 		build.addQueryParam("customerType", "%5B%22caller%22%2C%22ALL%22%5D");
 		build.log(LogDetail.ALL);
@@ -131,7 +131,7 @@ public class getLoads {
 			id.put("_id", custID);
 			id.put("isDeleted", "true");
 			System.out.println("=====>" +custID);
-			Response deleteLoad = given().auth().oauth2(token).body(id).baseUri("https://stagingapi.app.portpro.io").log().all()
+			Response deleteLoad = given().auth().oauth2(token).body(id).baseUri("https://app.portpro.io/").log().all()
 					.when().post("/carrier/removeTMSCustomer");
 			System.out.println(deleteLoad);
 			assertEquals(deleteLoad.statusCode(), 200);
@@ -149,7 +149,7 @@ public class getLoads {
 				HashMap<String, String> id = new HashMap<String, String>();
 				id.put("_id", custID);
 				id.put("isDeleted", "true");
-				Response deleteLoad = given().auth().oauth2(token).body(id).urlEncodingEnabled(false).baseUri("https://stagingapi.app.portpro.io")
+				Response deleteLoad = given().auth().oauth2(token).body(id).urlEncodingEnabled(false).baseUri("https://app.portpro.io/")
 						.when().post("/carrier/removeTMSCustomer");
 				System.out.println(deleteLoad);
 				assertEquals(deleteLoad.statusCode(), 200);

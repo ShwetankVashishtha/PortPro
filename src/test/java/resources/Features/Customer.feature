@@ -2,7 +2,7 @@ Feature: Check customer creation and updation functionality
 
   Background: PortPro Login
     Given User is redirected to AUT login url
-    And User login with "testport14@gmail.com" and "123456789"
+    And User login with "qaautomation123@yopmail.com" and "Yash1234"
 
   Scenario: Customer creation functionality
     When User redirects to Customer profile section

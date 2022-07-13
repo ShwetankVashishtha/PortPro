@@ -2,7 +2,7 @@ Feature: Check driver profile functionality
 
   Background: PortPro Login
     Given User is redirected to AUT login url
-    And User login with "testport14@gmail.com" and "123456789"
+    And User login with "qaautomation123@yopmail.com" and "Yash1234"
 
   Scenario: Driver creation functionality
     When User redirects to Driver profile section
@@ -12,4 +12,4 @@ Feature: Check driver profile functionality
     And User selects License state 
     And User provides License number
     And User clicks "Add" button
-    Then User gets message on driver creation "Driver has been added."
+    Then User gets message on driver creation "Driver Added Successfully"

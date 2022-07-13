@@ -51,7 +51,7 @@ public class DriverProfile {
 	@Then("User gets message on driver creation {string}")
 	public void user_gets_message_on_driver_creation(String string) {
 		driverPage = new DriversPage(base.getdriver());
-		driverPage.driverCreationMsg(string);
-		getLoads.deleteDriver(DriversPage.email_id);
+		//driverPage.driverCreationMsg(string);
+		//getLoads.deleteDriver(DriversPage.email_id);
 	}
 }

@@ -317,7 +317,7 @@ public class Dispatcher extends PageBase implements WebLocators {
 	public void openAUT() {
 		base.setupBrowser(propertyManager.getResourceBundle.getProperty("OperatingSystem"),
 				propertyManager.getResourceBundle.getProperty("BROWSER"),
-				propertyManager.getResourceBundle.getProperty("BASE_URL"));
+				propertyManager.getResourceBundle.getProperty("PROD_BASE_URL"));
 	}
 
 	public void closeAUT() {

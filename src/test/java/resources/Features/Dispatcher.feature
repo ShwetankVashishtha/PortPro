@@ -2,7 +2,7 @@ Feature: Verify dispatcher scenarios
 
   Background: PortPro Login
     Given User is redirected to AUT login url
-    And User login with "testport14@gmail.com" and "123456789"
+    And User login with "qaautomation123@yopmail.com" and "Yash1234"
 
   Scenario: Check dispatcher functionality - Add Load
     When User navigates to dispatcher page from left menu
